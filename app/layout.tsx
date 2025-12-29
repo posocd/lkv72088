@@ -75,16 +75,16 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning className={robotoMono.variable}>
       <head>
-        <link rel="preconnect" href="https://img.lv815.com" />
+        <link rel="preconnect" href="https://lkv72088.vercel.app" />
+        {/* RSS Autodiscovery Link */}
         <link rel="alternate" type="application/rss+xml" title={`RSS Feed ${CONFIG.site.title}`} href="/rss.xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="bg-[#050505] text-white selection:bg-yellow-400 selection:text-black antialiased font-mono">
-        <div className="fixed inset-0 pointer-events-none z-[9999] opacity-[0.03] scanline-bg"></div>
-        <div className="relative min-h-screen z-10">
+      <body className="bg-black text-white selection:bg-yellow-400 selection:text-black antialiased font-mono">
+        <div className="relative min-h-screen">
           {children}
         </div>
       </body>

@@ -1,66 +1,66 @@
 
 'use client';
 
-import React, { useState } from 'react';
-import SeoUpdater from './layout/SeoUpdater';
+import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../utils/LanguageContext';
 import Link from 'next/link';
-import { SITE_URL, CONFIG } from '../config';
+import { CONFIG } from '../config';
 
 const HomePage: React.FC = () => {
   const { t, language } = useLanguage();
-  const [imgError, setImgError] = useState(false);
+  const [typedText, setTypedText] = useState('');
+  const fullText = CONFIG.site.tagline[language].toUpperCase();
+
+  useEffect(() => {
+    let i = 0;
+    const interval = setInterval(() => {
+      setTypedText(fullText.slice(0, i));
+      i++;
+      if (i > fullText.length) clearInterval(interval);
+    }, 50);
+    return () => clearInterval(interval);
+  }, [language, fullText]);
 
   return (
-    <>
-      <SeoUpdater
-        title={`${CONFIG.site.title} | ${CONFIG.site.tagline[language]}`}
-        description={CONFIG.site.description[language]}
-        canonicalUrl={`${SITE_URL}/${language}/`}
-        ogType="website"
-        isHome={true}
-        keywords={CONFIG.site.keywords[language]}
-        breadcrumbs={[
-          { name: t('navHome'), item: `/${language}/` }
-        ]}
-      />
-      <div className="flex flex-col items-center justify-center text-center min-h-[75vh]">
-        <div className="bg-gray-900/40 border border-gray-800 rounded-2xl p-8 md:p-16 shadow-2xl shadow-yellow-400/5 w-full max-w-5xl relative overflow-hidden backdrop-blur-sm animate-fadeIn">
-          <div className="mb-10 flex justify-center relative z-10">
-            <div className="relative group">
-                <div className="absolute inset-0 bg-yellow-400 rounded-full blur-2xl opacity-10 group-hover:opacity-20 transition-opacity duration-700"></div>
-                {!imgError ? (
-                  <img 
-                    src={CONFIG.assets.heroImage} 
-                    alt={t('altHero')} 
-                    width="200" 
-                    height="200"
-                    className="w-32 h-32 md:w-44 md:h-44 rounded-full border-2 border-yellow-400/50 object-cover shadow-2xl filter grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
-                    onError={() => setImgError(true)}
-                  />
-                ) : (
-                  <div className="w-32 h-32 md:w-44 md:h-44 rounded-full border-2 border-yellow-400 bg-black flex items-center justify-center shadow-2xl font-bold text-yellow-400">HN</div>
-                )}
-            </div>
-          </div>
+    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center font-mono">
+      <div className="max-w-4xl w-full p-8 border border-green-900/20 bg-green-950/5 relative overflow-hidden animate-flicker">
+        <div className="absolute top-0 left-0 w-full h-1 bg-green-500/20"></div>
+        
+        <div className="mb-8 text-left text-[10px] text-green-800 uppercase tracking-widest">
+          Node_ID: {CONFIG.contact.sessionId.slice(0, 16)}...<br />
+          Status: Online<br />
+          Auth: Level_4_Restricted
+        </div>
 
-          <h1 className="text-3xl md:text-6xl font-black text-yellow-400 mb-6 tracking-tighter relative z-10 font-mono">
-            {CONFIG.site.tagline[language]}
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-10 leading-relaxed font-medium relative z-10">
-            {t('homeDesc')}
-          </p>
-          <div className="flex justify-center relative z-10">
-            <Link 
-              href={`/${language}/about/`} 
-              className="px-10 py-4 bg-yellow-400 text-black font-black uppercase tracking-widest rounded-lg hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-[0_0_30px_rgba(250,204,21,0.2)]"
-            >
-              {t('homeCta')}
-            </Link>
-          </div>
+        <h1 className="text-2xl md:text-5xl font-black text-green-500 mb-6 tracking-tighter glow-green min-h-[1.5em] flex items-center justify-center">
+          <span className="cursor-blink">{typedText}</span>
+        </h1>
+
+        <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed opacity-80">
+          {t('homeDesc')}
+        </p>
+
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link 
+            href={`/${language}/dispatches/`} 
+            className="px-8 py-3 bg-green-500 text-black font-black uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
+          >
+            [Access_Briefing]
+          </Link>
+          <Link 
+            href={`/${language}/services/`} 
+            className="px-8 py-3 border border-green-500 text-green-500 font-black uppercase tracking-widest hover:bg-green-500 hover:text-black transition-all duration-300"
+          >
+            [Service_Nodes]
+          </Link>
+        </div>
+
+        <div className="mt-12 pt-8 border-t border-green-900/10 text-[10px] text-green-900 uppercase flex justify-between">
+          <span>HackerNet_OS v3.1.0</span>
+          <span>© 2024 DECENTRALIZED_COMMAND</span>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
