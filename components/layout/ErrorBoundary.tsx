@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 import { useLanguage } from '../../utils/LanguageContext';
 
 interface Props {
@@ -17,8 +17,8 @@ interface BoundaryProps extends Props {
 /**
  * Standard React Error Boundary.
  */
-// Explicitly extending from the imported Component class to ensure proper member typing in TypeScript
-class ErrorBoundary extends Component<BoundaryProps, State> {
+// Use React.Component explicitly to ensure proper inheritance of setState and props in TypeScript
+class ErrorBoundary extends React.Component<BoundaryProps, State> {
   public state: State = {
     hasError: false,
     error: null,
@@ -36,8 +36,9 @@ class ErrorBoundary extends Component<BoundaryProps, State> {
     console.error('Uncaught error:', error, errorInfo);
   }
 
+  // Use arrow function for property to preserve 'this' context and access inherited setState
   private handleRetry = () => {
-    // FIX: Accessing setState provided by the React.Component base class
+    // Accessing setState from the React.Component base class
     this.setState({
       hasError: false,
       error: null
@@ -48,7 +49,7 @@ class ErrorBoundary extends Component<BoundaryProps, State> {
   };
 
   public render(): ReactNode {
-    // FIX: Accessing props provided by the React.Component base class
+    // Accessing props inherited from React.Component
     const { t } = this.props;
 
     if (this.state.hasError) {
@@ -84,7 +85,7 @@ class ErrorBoundary extends Component<BoundaryProps, State> {
       );
     }
 
-    // FIX: Accessing children from props provided by the React.Component base class
+    // Accessing children inherited from React.Component props
     return this.props.children;
   }
 }

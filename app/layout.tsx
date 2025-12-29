@@ -1,12 +1,10 @@
 
-// Adding explicit React import to resolve React namespace errors in TypeScript
 import React from 'react';
 import './globals.css';
 import { Metadata, Viewport } from 'next';
 import { CONFIG } from '@/config';
 import { Roboto_Mono } from 'next/font/google';
 
-// Mengaktifkan fitur auto-download dan optimasi font dari Next.js
 const robotoMono = Roboto_Mono({
   subsets: ['latin'],
   display: 'swap',
@@ -36,7 +34,6 @@ export const metadata: Metadata = {
       'en-US': '/en/',
       'id-ID': '/id/',
     },
-    // Menambahkan autodiscovery untuk RSS
     types: {
       'application/rss+xml': `${CONFIG.site.url}/rss.xml`,
     },
@@ -78,8 +75,8 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning className={robotoMono.variable}>
       <head>
-        <link rel="preconnect" href="https://lkv72088.vercel.app" />
-        {/* RSS Autodiscovery */}
+        <link rel="preconnect" href="https://img.lv815.com" />
+        {/* RSS Autodiscovery Link */}
         <link rel="alternate" type="application/rss+xml" title={`RSS Feed ${CONFIG.site.title}`} href="/rss.xml" />
         <script
           type="application/ld+json"
