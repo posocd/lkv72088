@@ -17,8 +17,8 @@ interface BoundaryProps extends Props {
 /**
  * Standard React Error Boundary.
  */
-// Explicitly extending React.Component to resolve 'setState' and 'props' type errors
-class ErrorBoundary extends React.Component<BoundaryProps, State> {
+// Explicitly extending from the imported Component class to ensure proper member typing in TypeScript
+class ErrorBoundary extends Component<BoundaryProps, State> {
   public state: State = {
     hasError: false,
     error: null,
@@ -37,7 +37,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
   }
 
   private handleRetry = () => {
-    // Explicitly using this.setState as provided by React.Component
+    // FIX: Accessing setState provided by the React.Component base class
     this.setState({
       hasError: false,
       error: null
@@ -48,7 +48,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
   };
 
   public render(): ReactNode {
-    // Accessing t from props via this.props
+    // FIX: Accessing props provided by the React.Component base class
     const { t } = this.props;
 
     if (this.state.hasError) {
@@ -84,7 +84,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
       );
     }
 
-    // Accessing children from props via this.props
+    // FIX: Accessing children from props provided by the React.Component base class
     return this.props.children;
   }
 }
