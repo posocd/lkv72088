@@ -2,8 +2,10 @@
 import { dispatchesList } from '@/data/dispatches';
 import { CONFIG } from '@/config';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
-  const l = 'id'; // Default language for root RSS
+  const l = 'id'; // Default language for global RSS feed
   const baseUrl = CONFIG.site.url;
 
   const items = dispatchesList
@@ -36,6 +38,7 @@ export async function GET() {
     headers: {
       'Content-Type': 'application/xml; charset=utf-8',
       'Cache-Control': 's-maxage=3600, stale-while-revalidate',
+      'X-Content-Type-Options': 'nosniff',
     },
   });
 }

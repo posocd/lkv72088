@@ -1,4 +1,4 @@
-import React, { ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { useLanguage } from '../../utils/LanguageContext';
 
 interface Props {
@@ -17,8 +17,8 @@ interface BoundaryProps extends Props {
 /**
  * Standard React Error Boundary.
  */
-// Use React.Component explicitly to ensure proper inheritance of setState and props in TypeScript
-class ErrorBoundary extends React.Component<BoundaryProps, State> {
+// Use Component directly to ensure proper inheritance of setState and props in TypeScript
+class ErrorBoundary extends Component<BoundaryProps, State> {
   public state: State = {
     hasError: false,
     error: null,
@@ -38,7 +38,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
 
   // Use arrow function for property to preserve 'this' context and access inherited setState
   private handleRetry = () => {
-    // Accessing setState from the React.Component base class
+    // Accessing setState from the Component base class to clear error state
     this.setState({
       hasError: false,
       error: null
@@ -49,7 +49,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
   };
 
   public render(): ReactNode {
-    // Accessing props inherited from React.Component
+    // Accessing props inherited from Component for localized strings
     const { t } = this.props;
 
     if (this.state.hasError) {
@@ -85,7 +85,7 @@ class ErrorBoundary extends React.Component<BoundaryProps, State> {
       );
     }
 
-    // Accessing children inherited from React.Component props
+    // Accessing children inherited from Component props to render the underlying tree
     return this.props.children;
   }
 }

@@ -7,10 +7,10 @@
   color-scheme: dark;
   --bg-black: #050505;
   --accent-yellow: #facc15;
+  --hacker-green: #22c55e;
 }
 
 html, body {
-  /* Menggunakan variable font yang di-inject dari layout.tsx */
   font-family: var(--font-roboto-mono), ui-monospace, monospace;
   background-color: var(--bg-black);
   color: #f3f4f6;
@@ -19,49 +19,53 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* CRT Scanline Effect */
-body::before {
-  content: " ";
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
-              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
-  z-index: 1000;
+/* CRT Scanline Effect Overlay */
+.scanline-bg {
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  ), linear-gradient(
+    90deg,
+    rgba(255, 0, 0, 0.06),
+    rgba(0, 255, 0, 0.02),
+    rgba(0, 0, 255, 0.06)
+  );
   background-size: 100% 4px, 3px 100%;
-  pointer-events: none;
-  opacity: 0.3;
 }
 
 body {
   cursor: crosshair;
 }
 
-/* Accessibility Focus States */
-:focus-visible {
-  outline: 2px solid var(--accent-yellow);
-  outline-offset: 4px;
-}
-
 /* Scrollbar Customization */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222;
-  border-radius: 0;
+  background: #111;
+  border: 1px solid #333;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent-yellow);
 }
 
-/* Modern Animations */
+/* Terminal Flicker Effect */
+@keyframes flicker {
+  0% { opacity: 0.97; }
+  5% { opacity: 0.95; }
+  10% { opacity: 0.99; }
+  15% { opacity: 0.93; }
+  20% { opacity: 0.98; }
+  100% { opacity: 1; }
+}
+
+.animate-flicker {
+  animation: flicker 0.15s infinite;
+}
+
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -71,17 +75,27 @@ body {
   animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Glow effects for text and borders */
-.glow-text {
-  text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+/* Glow effects */
+.glow-yellow {
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.4);
 }
 
-.glow-border {
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.1);
+.glow-green {
+  text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.border-hacker {
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  transition: all 0.3s ease;
+}
+
+.border-hacker:hover {
+  border-color: rgba(250, 204, 21, 0.5);
+  box-shadow: 0 0 15px rgba(250, 204, 21, 0.1);
 }
 
 .post-content-text {
-  font-size: 1.125rem;
+  font-size: 1.1rem;
   line-height: 1.8;
   color: #e5e7eb;
 }
