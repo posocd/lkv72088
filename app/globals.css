@@ -1,0 +1,87 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --bg-black: #050505;
+  --accent-yellow: #facc15;
+}
+
+html, body {
+  /* Menggunakan variable font yang di-inject dari layout.tsx */
+  font-family: var(--font-roboto-mono), ui-monospace, monospace;
+  background-color: var(--bg-black);
+  color: #f3f4f6;
+  scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* CRT Scanline Effect */
+body::before {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
+  z-index: 1000;
+  background-size: 100% 4px, 3px 100%;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+body {
+  cursor: crosshair;
+}
+
+/* Accessibility Focus States */
+:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 4px;
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #222;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-yellow);
+}
+
+/* Modern Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Glow effects for text and borders */
+.glow-text {
+  text-shadow: 0 0 10px rgba(250, 204, 21, 0.3);
+}
+
+.glow-border {
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.1);
+}
+
+.post-content-text {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: #e5e7eb;
+}
