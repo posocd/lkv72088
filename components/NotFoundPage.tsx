@@ -1,6 +1,6 @@
 'use client';
 
-import React ignored from 'react';
+import React from 'react';
 import SeoUpdater from './layout/SeoUpdater';
 // Fix case-sensitive import
 import { useLanguage } from '@/components/dictionary';
