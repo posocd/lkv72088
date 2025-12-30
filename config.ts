@@ -40,7 +40,7 @@ export const CONFIG = {
     favicon: '/favicon.svg',
     logo: '/web-app-manifest-512x512.png',
     defaultOgImage: '/default-og-image.jpg',
-    imageBaseUrl: 'https://img.lv815.com',
+    imageBaseUrl: 'https://lkv72088.vercel.app',
     heroImage: '/assets/hacker.webp' 
   },
   contact: {
@@ -96,7 +96,7 @@ export const CONFIG = {
       price: { id: 'Rp 225jt', en: '$15K' },
       schemaPrice: '225000000',
       currency: 'IDR',
-      image: 'https://img.lv815.com/hkn/pricing-ghost.webp',
+      image: 'https://lkv72088.vercel.app/hkn/pricing-ghost.webp',
       description: { id: 'Keamanan ofensif dan defensif tingkat lanjut untuk korporasi.', en: 'Advanced offensive and defensive capabilities for enterprises.' },
       features: {
         id: ['Patching Zero-Day', 'Audit dApp', 'Monitoring 24/7'],

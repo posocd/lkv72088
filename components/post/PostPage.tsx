@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
@@ -7,7 +6,7 @@ import { loadDispatchContent } from '../../data/dispatches';
 import { HackerImage } from '../layout/AnimEffects';
 import SeoUpdater from '../../components/layout/SeoUpdater';
 import { promotionsData } from '../../data/promotions';
-import { useLanguage } from '../../utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import Link from 'next/link';
 import { SITE_URL } from '../../config';
 

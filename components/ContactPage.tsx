@@ -1,9 +1,8 @@
-
 'use client';
 
 import React, { useState } from 'react';
 import SeoUpdater from '@/components/layout/SeoUpdater';
-import { useLanguage } from '@/utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import { SITE_URL, CONFIG } from '@/config';
 import { SendIcon, DownloadIcon, CheckIcon } from '@/components/icons/InterfaceIcons';
 

@@ -3,7 +3,7 @@
 import React from 'react';
 import { HackerImage } from './layout/AnimEffects';
 import SeoUpdater from './layout/SeoUpdater';
-import { useLanguage } from '../utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import Link from 'next/link';
 import { SITE_URL, CONFIG } from '../config';
 import { CheckIcon } from './icons/InterfaceIcons';

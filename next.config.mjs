@@ -7,7 +7,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img.lv815.com',
+        hostname: 'lkv72088.vercel.app',
       },
     ],
   },

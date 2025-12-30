@@ -1,9 +1,8 @@
-
 'use client';
 
 import React, { useState } from 'react';
 import { MenuIcon, XIcon } from '@/components/icons/InterfaceIcons';
-import { useLanguage } from '@/utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';

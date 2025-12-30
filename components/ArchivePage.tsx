@@ -1,10 +1,9 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
 import { ArchiveItem } from '@/types';
 import { decryptArchive } from '@/security';
-import { useLanguage } from '@/utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';
 

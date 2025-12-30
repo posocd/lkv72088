@@ -1,8 +1,7 @@
-
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useLanguage } from '@/utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import Link from 'next/link';
 import { CONFIG } from '@/config';
 

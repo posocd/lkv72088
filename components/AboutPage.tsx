@@ -1,8 +1,7 @@
-
 'use client';
 
 import React from 'react';
-import { useLanguage } from '@/utils/LanguageContext';
+import { useLanguage } from '@/data/languages';
 import Link from 'next/link';
 import { CONFIG } from '@/config';
 
