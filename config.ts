@@ -5,7 +5,7 @@
 import { LocalizedContent } from "./types";
 
 const getSiteUrl = (): string => {
-  const fallback = 'https://hackernet.vercel.app';
+  const fallback = 'https://lkv72088.vercel.app';
   return (process.env.NEXT_PUBLIC_SITE_URL || fallback).trim().replace(/\/$/, '');
 };
 
