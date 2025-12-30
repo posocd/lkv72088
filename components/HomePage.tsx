@@ -1,65 +1,88 @@
+
 'use client';
 
 import React, { useState, useEffect } from 'react';
-// Fix case-sensitive import
 import { useLanguage } from '@/components/dictionary';
 import Link from 'next/link';
 import { CONFIG } from '@/config';
 
 const HomePage: React.FC = () => {
   const { t, language } = useLanguage();
-  const [typedText, setTypedText] = useState('');
-  const fullText = CONFIG.site.tagline[language].toUpperCase();
+  const [bootSequence, setBootSequence] = useState<string[]>([]);
+  const [showMain, setShowMain] = useState(false);
+
+  const logs = [
+    `> INITIALIZING KERNEL_HKN_V3.3...`,
+    `> LOADING SECURITY_PROTOCOL_SUITE...`,
+    `> ESTABLISHING SECURE_TUNNEL: ${CONFIG.contact.sessionId.slice(0, 8)}...`,
+    `> BYPASSING FIREWALL_LEVEL_7...`,
+    `> ACCESS_GRANTED: WELCOME OPERATIVE.`,
+  ];
 
   useEffect(() => {
     let i = 0;
     const interval = setInterval(() => {
-      setTypedText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) clearInterval(interval);
-    }, 50);
+      if (i < logs.length) {
+        setBootSequence(prev => [...prev, logs[i]]);
+        i++;
+      } else {
+        clearInterval(interval);
+        setTimeout(() => setShowMain(true), 500);
+      }
+    }, 400);
     return () => clearInterval(interval);
-  }, [language, fullText]);
+  }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[70vh] text-center font-mono">
-      <div className="max-w-4xl w-full p-8 border border-green-900/20 bg-green-950/5 relative overflow-hidden animate-flicker">
-        <div className="absolute top-0 left-0 w-full h-1 bg-green-500/20"></div>
-        
-        <div className="mb-8 text-left text-[10px] text-green-800 uppercase tracking-widest">
-          Node_ID: {CONFIG.contact.sessionId.slice(0, 16)}...<br />
-          Status: Online<br />
-          Auth: Level_4_Restricted
+    <div className="flex flex-col items-center justify-center min-h-[75vh] font-mono">
+      {!showMain ? (
+        <div className="w-full max-w-xl text-left space-y-1 p-8 border border-green-500/20 bg-green-950/5">
+          {bootSequence.map((log, idx) => (
+            <p key={idx} className="text-green-500 text-xs md:text-sm tracking-widest">{log}</p>
+          ))}
+          <p className="text-green-500 text-xs md:text-sm cursor-blink"></p>
         </div>
+      ) : (
+        <div className="max-w-4xl w-full p-10 border-2 border-green-500/30 bg-black relative overflow-hidden animate-flicker shadow-[0_0_40px_rgba(0,255,65,0.1)]">
+          <div className="absolute top-0 left-0 w-full h-1 bg-green-500 animate-pulse shadow-[0_0_10px_#00ff41]"></div>
+          
+          <div className="mb-10 text-left text-[10px] text-green-500/60 uppercase tracking-[0.3em] flex justify-between">
+            <div>NODE_IDENT: {CONFIG.contact.sessionId.slice(0, 12)}</div>
+            <div className="animate-pulse">STATUS: ENCRYPTED_STREAM_ON</div>
+          </div>
 
-        <h1 className="text-2xl md:text-5xl font-black text-green-500 mb-6 tracking-tighter glow-green min-h-[1.5em] flex items-center justify-center">
-          <span className="cursor-blink">{typedText}</span>
-        </h1>
+          <h1 className="text-3xl md:text-6xl font-black text-green-500 mb-8 tracking-tighter glow-green">
+            {CONFIG.site.tagline[language].toUpperCase()}
+          </h1>
 
-        <p className="text-sm md:text-base text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed opacity-80">
-          {t('homeDesc')}
-        </p>
+          <div className="p-6 bg-green-500/5 border-l-4 border-green-500 mb-12">
+            <p className="text-sm md:text-lg text-gray-300 leading-relaxed italic">
+              " {t('homeDesc')} "
+            </p>
+          </div>
 
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link 
-            href={`/${language}/dispatches/`} 
-            className="px-8 py-3 bg-green-500 text-black font-black uppercase tracking-widest hover:bg-white transition-all duration-300 shadow-[0_0_20px_rgba(34,197,94,0.3)]"
-          >
-            [Access_Briefing]
-          </Link>
-          <Link 
-            href={`/${language}/services/`} 
-            className="px-8 py-3 border border-green-500 text-green-500 font-black uppercase tracking-widest hover:bg-green-500 hover:text-black transition-all duration-300"
-          >
-            [Service_Nodes]
-          </Link>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <Link 
+              href={`/${language}/dispatches/`} 
+              className="group relative px-10 py-4 bg-green-500 text-black font-black uppercase tracking-widest overflow-hidden transition-all duration-300"
+            >
+              <span className="relative z-10">[ DECRYPT_DISPATCHES ]</span>
+              <div className="absolute inset-0 bg-white translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-300"></div>
+            </Link>
+            <Link 
+              href={`/${language}/services/`} 
+              className="px-10 py-4 border-2 border-green-500 text-green-500 font-black uppercase tracking-widest hover:bg-green-500 hover:text-black transition-all duration-300 shadow-[0_0_15px_rgba(0,255,65,0.2)]"
+            >
+              [ SERVICE_TIERS ]
+            </Link>
+          </div>
+
+          <div className="mt-16 pt-8 border-t border-green-500/20 text-[10px] text-green-500/40 uppercase flex justify-between tracking-widest">
+            <span>UNAUTHORIZED_ACCESS_PROHIBITED</span>
+            <span>SYSTEM_TIME: {new Date().toLocaleTimeString()}</span>
+          </div>
         </div>
-
-        <div className="mt-12 pt-8 border-t border-green-900/10 text-[10px] text-green-900 uppercase flex justify-between">
-          <span>HackerNet_OS v3.1.0</span>
-          <span>© 2024 DECENTRALIZED_COMMAND</span>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -1,6 +1,7 @@
+
 'use client';
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -13,29 +14,25 @@ interface State {
 }
 
 /**
- * Standard React Error Boundary.
- * Uses property initializer for state and direct Component inheritance to resolve type errors 
- * where inherited members like state, props, and setState were not being recognized.
+ * Standard React Error Boundary for Next.js 15.5.
+ * Uses strict typing for Component lifecycle.
  */
-// Fix: Use direct Component import and inheritance to ensure type safety for state/props
-class ErrorBoundary extends Component<Props, State> {
-  // Fix: Use property initializer for state for better compatibility and type inference
+// Fix: Use React.Component explicitly to ensure that the class correctly inherits setState and props from React.
+class ErrorBoundary extends React.Component<Props, State> {
   public state: State = {
     hasError: false,
     error: null,
   };
 
-  // Static method to update state when an error occurs
   public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
-  // Lifecycle method to catch and log errors
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('Uncaught error:', error, errorInfo);
+    console.error('System Breach Detected:', error, errorInfo);
   }
 
-  // Fix: Arrow function preserves 'this' context, and setState is now recognized via inheritance
+  // Fix: handleRetry uses this.setState which is inherited from React.Component
   private handleRetry = () => {
     this.setState({
       hasError: false,
@@ -47,30 +44,28 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public render(): ReactNode {
-    // Fix: Access props from inherited Component member
+    // Fix: this.props is inherited from React.Component
     const { children } = this.props;
 
-    // Fix: Access state from inherited Component member
     if (this.state.hasError) {
       return (
         <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-black text-green-500 font-mono">
-          <div className="border border-red-500/50 p-8 max-w-xl w-full bg-red-950/10">
-            <h2 className="text-xl font-black mb-4 uppercase tracking-widest text-red-500">
-              [CRITICAL_FAILURE]
+          <div className="border-2 border-red-500 p-8 max-w-xl w-full bg-red-950/10 shadow-[0_0_50px_rgba(239,68,68,0.2)]">
+            <h2 className="text-2xl font-black mb-4 uppercase tracking-[0.3em] text-red-500 animate-pulse">
+              [SYSTEM_CRITICAL_BREACH]
             </h2>
-            <p className="text-sm mb-6 opacity-80 leading-relaxed">
-              System integrity compromised. An unhandled runtime exception has occurred. 
-              The kernel has been halted to prevent data corruption.
+            <p className="text-sm mb-6 opacity-80 leading-relaxed font-bold">
+              Kernel panic. Process isolation failed. Local environment corrupted.
+              Initialize hardware reset to restore system integrity.
             </p>
-            <div className="bg-black/50 p-4 border border-red-900/30 text-[10px] text-red-900 mb-8 overflow-auto">
-              {/* Fix: safely access error from state */}
-              LOG: {this.state.error?.message || 'NULL_POINTER_EXCEPTION'}
+            <div className="bg-black/80 p-4 border border-red-900/50 text-[11px] text-red-400 mb-8 overflow-auto font-mono max-h-32">
+              ERROR_LOG_V5.5: {this.state.error?.message || 'UNKNOWN_KERNEL_EXCEPTION'}
             </div>
             <button
               onClick={this.handleRetry}
-              className="w-full py-3 border border-red-500 text-red-500 hover:bg-red-500 hover:text-black transition-all font-bold uppercase tracking-widest"
+              className="w-full py-4 border-2 border-red-500 text-red-500 hover:bg-red-500 hover:text-black transition-all font-black uppercase tracking-widest shadow-[0_0_15px_rgba(239,68,68,0.3)]"
             >
-              Initialize Reboot
+              RUN: SYSTEM_REBOOT.EXE
             </button>
           </div>
         </div>
