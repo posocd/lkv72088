@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { MenuIcon, XIcon } from '@/components/icons/InterfaceIcons';
-import { useLanguage } from '@/components/Dictionary';
+import { useLanguage } from '../dictionary';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';

@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import { DispatchSummary } from '@/types';
-import { useLanguage } from '@/components/Dictionary';
+// Fix case-sensitive import
+import { useLanguage } from '@/components/dictionary';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
@@ -73,7 +74,7 @@ const DispatchesPage: React.FC<DispatchesPageProps> = ({ initialItems, totalPage
           <input
             type="text" 
             value={inputValue} 
-            onChange={(e) => setInputValue(e.target.value)} 
+            onChange={(e) => setInputValue(setInputValue(e.target.value))} 
             placeholder={t('searchPlaceholder')}
             className="w-full px-6 py-4 bg-gray-900/50 border border-gray-800 rounded-lg text-gray-100 font-mono focus:outline-none focus:border-yellow-400 transition-all placeholder:text-gray-600 shadow-inner"
           />

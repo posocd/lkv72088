@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
-import { LanguageProvider } from '@/components/Dictionary';
+import { LanguageProvider } from '../../components/dictionary';
 import ErrorBoundary from '@/components/layout/ErrorBoundary';
 
 export default async function LocaleLayout({

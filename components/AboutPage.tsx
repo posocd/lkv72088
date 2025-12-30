@@ -1,7 +1,8 @@
 'use client';
 
 import React from 'react';
-import { useLanguage } from '@/components/Dictionary';
+// Fix case-sensitive import
+import { useLanguage } from '@/components/dictionary';
 import Link from 'next/link';
 import { CONFIG } from '@/config';
 

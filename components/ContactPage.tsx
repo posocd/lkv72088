@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import SeoUpdater from '@/components/layout/SeoUpdater';
-import { useLanguage } from '@/components/Dictionary';
+// Fix case-sensitive import
+import { useLanguage } from '@/components/dictionary';
 import { SITE_URL, CONFIG } from '@/config';
 import { SendIcon, DownloadIcon, CheckIcon } from '@/components/icons/InterfaceIcons';
 

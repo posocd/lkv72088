@@ -3,7 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { ArchiveItem } from '@/types';
 import { decryptArchive } from '@/security';
-import { useLanguage } from '@/components/Dictionary';
+// Fix case-sensitive import
+import { useLanguage } from '@/components/dictionary';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';
 

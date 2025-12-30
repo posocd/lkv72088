@@ -1,6 +1,6 @@
 import { dispatchesList, loadDispatchContent } from '@/data/dispatches';
 import { CONFIG } from '@/config';
-import { dictionary } from '@/components/Dictionary';
+import { dictionary } from '../../../../components/dictionary';
 import { NextRequest } from 'next/server';
 
 export async function GET(
@@ -86,7 +86,7 @@ export async function GET(
 </head>
 <body>
   <div class="container">
-    <div class="label">${dictionary.dataTransmission[l]} // PROTOCOL_AMP_V5</div>
+    <div class="label">DATA_TRANSMISSION // PROTOCOL_AMP_V5</div>
     <h1>${post.title[l]}</h1>
     <div class="meta">
       ORIGIN: ${post.author.toUpperCase()}<br>

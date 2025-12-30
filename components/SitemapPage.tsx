@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { dispatchesList } from '../data/dispatches';
-import { useLanguage } from '@/components/Dictionary';
+// Fix case-sensitive import
+import { useLanguage } from '@/components/dictionary';
 import Link from 'next/link';
 
 const SitemapPage: React.FC = () => {
