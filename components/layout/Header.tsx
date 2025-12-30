@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { MenuIcon, XIcon } from '@/components/icons/InterfaceIcons';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';
@@ -88,7 +88,7 @@ export default function Header({ lang }: { lang: string }) {
                       }`}
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    > {item.label}
+                    {">"} {item.label}
                   </Link>
                 </li>
               ))}
@@ -97,7 +97,7 @@ export default function Header({ lang }: { lang: string }) {
                   onClick={toggleLanguage}
                   className="w-full text-left px-4 py-3 text-xs font-bold uppercase tracking-widest text-green-500 border-t border-green-900/20"
                 >
-                  > SWITCH_LANG: {lang === 'en' ? 'INDONESIAN' : 'ENGLISH'}
+                  {">"} SWITCH_LANG: {lang === 'en' ? 'INDONESIAN' : 'ENGLISH'}
                 </button>
               </li>
           </ul>

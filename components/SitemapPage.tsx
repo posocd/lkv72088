@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { dispatchesList } from '../data/dispatches';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 
 const SitemapPage: React.FC = () => {

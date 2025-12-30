@@ -1,6 +1,6 @@
 import { dispatchesList, loadDispatchContent } from '@/data/dispatches';
 import { CONFIG } from '@/config';
-import { dictionary } from '@/data/languages';
+import { dictionary } from '@/components/Dictionary';
 import { NextRequest } from 'next/server';
 
 export async function GET(

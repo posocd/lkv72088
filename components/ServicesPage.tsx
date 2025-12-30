@@ -3,16 +3,24 @@
 import React from 'react';
 import { HackerImage } from './layout/AnimEffects';
 import SeoUpdater from './layout/SeoUpdater';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 import { SITE_URL, CONFIG } from '../config';
 import { CheckIcon } from './icons/InterfaceIcons';
 
-const PricingCard: React.FC<{
-  tier: string; price: string; description: string; features: string[];
-  isFeatured?: boolean; buttonText: string; unit: string; contactLink: string;
+interface PricingCardProps {
+  tier: string;
+  price: string;
+  description: string;
+  features: string[];
+  isFeatured?: boolean;
+  buttonText: string;
+  unit: string;
+  contactLink: string;
   image: string;
-}> = ({ tier, price, description, features, isFeatured = false, buttonText, unit, contactLink, image }) => {
+}
+
+const PricingCard: React.FC<PricingCardProps> = ({ tier, price, description, features, isFeatured = false, buttonText, unit, contactLink, image }) => {
   const { t } = useLanguage();
   return (
     <article className={`p-8 border rounded-xl flex flex-col overflow-hidden transition-all duration-500 ${isFeatured ? 'border-yellow-400 bg-gray-900 shadow-[0_0_50px_rgba(250,204,21,0.1)] scale-105 z-10' : 'border-gray-800 bg-gray-900/30 hover:border-gray-700'}`}>

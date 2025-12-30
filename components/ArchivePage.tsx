@@ -3,18 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { ArchiveItem } from '@/types';
 import { decryptArchive } from '@/security';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import { useRouter, usePathname } from 'next/navigation';
 import { CONFIG } from '@/config';
 
-interface ArchivePageProps {
-  initialItems: ArchiveItem[];
-  totalPages: number;
-  currentPage: number;
-  searchQuery: string;
+interface ArchiveCardProps {
+  item: ArchiveItem;
+  onIntrusion: () => void;
 }
 
-const ArchiveCard: React.FC<{ item: ArchiveItem, onIntrusion: () => void }> = ({ item, onIntrusion }) => {
+const ArchiveCard: React.FC<ArchiveCardProps> = ({ item, onIntrusion }) => {
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [isPrompting, setIsPrompting] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
@@ -139,6 +137,14 @@ const ArchiveCard: React.FC<{ item: ArchiveItem, onIntrusion: () => void }> = ({
     </article>
   );
 };
+
+// Fix: Added missing ArchivePageProps interface to fix type error.
+interface ArchivePageProps {
+  initialItems: ArchiveItem[];
+  totalPages: number;
+  currentPage: number;
+  searchQuery: string;
+}
 
 const ArchivePage: React.FC<ArchivePageProps> = ({ initialItems, totalPages, currentPage, searchQuery }) => {
   const router = useRouter();

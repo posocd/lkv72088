@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -17,12 +17,15 @@ interface State {
  * Standard React Error Boundary.
  * Uses explicit React.Component to ensure compatibility across different environment configurations.
  */
-class ErrorBoundary extends Component<Props, State> {
-  // Initialize state directly as a class property
-  public state: State = {
-    hasError: false,
-    error: null,
-  };
+class ErrorBoundary extends React.Component<Props, State> {
+  // Fix: Explicitly initialize state in constructor for better type inference in some environments
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      hasError: false,
+      error: null,
+    };
+  }
 
   // Static method to update state when an error occurs
   public static getDerivedStateFromError(error: Error): State {
@@ -34,8 +37,8 @@ class ErrorBoundary extends Component<Props, State> {
     console.error('Uncaught error:', error, errorInfo);
   }
 
-  // Fix: Correct context for this.setState using arrow function property
-  // Explicitly using Component from 'react' helps TypeScript resolve members
+  // Fix: Use arrow function for property to preserve 'this' context, 
+  // and ensure React.Component methods like setState are resolved correctly.
   private handleRetry = () => {
     this.setState({
       hasError: false,
@@ -47,7 +50,7 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public render(): ReactNode {
-    // Fix: Access props from this context properly
+    // Fix: Access props from this context properly using inherited React.Component member
     const { children } = this.props;
 
     if (this.state.hasError) {

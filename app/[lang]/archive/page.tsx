@@ -1,9 +1,8 @@
-
 import { Metadata } from 'next';
 import ArchivePageContent from '@/components/ArchivePage';
 import { CONFIG } from '@/config';
 import { archiveData } from '@/data/archive';
-import { dictionary } from '@/data/languages';
+import { dictionary } from '@/components/Dictionary';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;

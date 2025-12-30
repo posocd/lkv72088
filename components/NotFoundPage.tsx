@@ -2,7 +2,7 @@
 
 import React from 'react';
 import SeoUpdater from './layout/SeoUpdater';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 import { SITE_URL } from '../config';
 

@@ -2,18 +2,17 @@
 
 import React, { useState } from 'react';
 import { DispatchSummary } from '@/types';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
-interface DispatchesPageProps {
-  initialItems: DispatchSummary[];
-  totalPages: number;
-  currentPage: number;
-  searchQuery: string;
+interface DispatchCardProps {
+  item: DispatchSummary;
+  t: (key: string) => string;
+  language: 'en' | 'id';
 }
 
-const DispatchCard: React.FC<{ item: DispatchSummary; t: any; language: 'en' | 'id' }> = ({ item, t, language }) => (
+const DispatchCard: React.FC<DispatchCardProps> = ({ item, t, language }) => (
   <article className="p-8 border border-gray-800 rounded-2xl bg-gray-900/30 backdrop-blur-sm hover:border-yellow-400/50 transition-all duration-300 flex flex-col group shadow-lg">
     <header className="mb-4">
       <h3 className="text-xl font-bold text-yellow-400 group-hover:text-white transition-colors tracking-tight leading-snug font-mono">{item.title[language]}</h3>
@@ -32,6 +31,13 @@ const DispatchCard: React.FC<{ item: DispatchSummary; t: any; language: 'en' | '
     </footer>
   </article>
 );
+
+interface DispatchesPageProps {
+  initialItems: DispatchSummary[];
+  totalPages: number;
+  currentPage: number;
+  searchQuery: string;
+}
 
 const DispatchesPage: React.FC<DispatchesPageProps> = ({ initialItems, totalPages, currentPage, searchQuery }) => {
   const router = useRouter();

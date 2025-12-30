@@ -1,9 +1,8 @@
-
 import { Metadata } from 'next';
 import DispatchesPageContent from '@/components/DispatchesPage';
 import { CONFIG } from '@/config';
 import { dispatchesList } from '@/data/dispatches';
-import { dictionary } from '@/data/languages';
+import { dictionary } from '@/components/Dictionary';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;

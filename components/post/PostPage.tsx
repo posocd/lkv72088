@@ -6,7 +6,7 @@ import { loadDispatchContent } from '../../data/dispatches';
 import { HackerImage } from '../layout/AnimEffects';
 import SeoUpdater from '../../components/layout/SeoUpdater';
 import { promotionsData } from '../../data/promotions';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import Link from 'next/link';
 import { SITE_URL } from '../../config';
 

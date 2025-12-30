@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import SeoUpdater from '@/components/layout/SeoUpdater';
-import { useLanguage } from '@/data/languages';
+import { useLanguage } from '@/components/Dictionary';
 import { SITE_URL, CONFIG } from '@/config';
 import { SendIcon, DownloadIcon, CheckIcon } from '@/components/icons/InterfaceIcons';
 
@@ -202,4 +202,6 @@ const ContactPage: React.FC = () => {
       </section>
     </>
   );
-}; export default ContactPage;
+};
+
+export default ContactPage;

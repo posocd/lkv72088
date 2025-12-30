@@ -1,8 +1,7 @@
-
 import { Metadata } from 'next';
 import SitemapPageContent from '@/components/SitemapPage';
 import { CONFIG } from '@/config';
-import { dictionary } from '@/data/languages';
+import { dictionary } from '@/components/Dictionary';
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
