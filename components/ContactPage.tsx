@@ -1,10 +1,11 @@
+
 'use client';
 
 import React, { useState } from 'react';
-import SeoUpdater from './layout/SeoUpdater';
-import { useLanguage } from '../utils/LanguageContext';
-import { SITE_URL, CONFIG } from '../config';
-import { SendIcon, DownloadIcon, CheckIcon } from './icons/InterfaceIcons';
+import SeoUpdater from '@/components/layout/SeoUpdater';
+import { useLanguage } from '@/utils/LanguageContext';
+import { SITE_URL, CONFIG } from '@/config';
+import { SendIcon, DownloadIcon, CheckIcon } from '@/components/icons/InterfaceIcons';
 
 const ContactPage: React.FC = () => {
   const sessionId = CONFIG.contact.sessionId;

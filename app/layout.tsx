@@ -75,7 +75,7 @@ export default function RootLayout({
   return (
     <html lang="id" suppressHydrationWarning className={robotoMono.variable}>
       <head>
-        <link rel="preconnect" href="https://lkv72088.vercel.app" />
+        <link rel="preconnect" href="https://img.lv815.com" />
         {/* RSS Autodiscovery Link */}
         <link rel="alternate" type="application/rss+xml" title={`RSS Feed ${CONFIG.site.title}`} href="/rss.xml" />
         <script

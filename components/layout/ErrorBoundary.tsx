@@ -1,7 +1,7 @@
 
 'use client';
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import React, { ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -15,22 +15,28 @@ interface State {
 
 /**
  * Standard React Error Boundary.
+ * Uses explicit React.Component to ensure compatibility across different environment configurations.
  */
-class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends React.Component<Props, State> {
+  // Initialize state directly as a class property
   public state: State = {
     hasError: false,
     error: null,
   };
 
+  // Static method to update state when an error occurs
   public static getDerivedStateFromError(error: Error): State {
     return { hasError: true, error };
   }
 
+  // Lifecycle method to catch and log errors
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error('Uncaught error:', error, errorInfo);
   }
 
+  // Fix: Correct context for this.setState using arrow function property
   private handleRetry = () => {
+    // Property 'setState' exists on React.Component
     this.setState({
       hasError: false,
       error: null
@@ -41,6 +47,7 @@ class ErrorBoundary extends Component<Props, State> {
   };
 
   public render(): ReactNode {
+    // Fix: Access props from this context
     const { children } = this.props;
 
     if (this.state.hasError) {

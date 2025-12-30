@@ -2,11 +2,11 @@
 'use client';
 
 import React, { useState } from 'react';
-import { MenuIcon, XIcon } from '../icons/InterfaceIcons';
-import { useLanguage } from '../../utils/LanguageContext';
+import { MenuIcon, XIcon } from '@/components/icons/InterfaceIcons';
+import { useLanguage } from '@/utils/LanguageContext';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
-import { CONFIG } from '../../config';
+import { CONFIG } from '@/config';
 
 export default function Header({ lang }: { lang: string }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);

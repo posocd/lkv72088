@@ -2,9 +2,9 @@
 'use client';
 
 import React from 'react';
-import { useLanguage } from '../utils/LanguageContext';
+import { useLanguage } from '@/utils/LanguageContext';
 import Link from 'next/link';
-import { CONFIG } from '../config';
+import { CONFIG } from '@/config';
 
 const AboutPage: React.FC = () => {
   const { t, language } = useLanguage();

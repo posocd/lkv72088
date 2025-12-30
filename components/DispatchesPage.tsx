@@ -2,8 +2,8 @@
 'use client';
 
 import React, { useState } from 'react';
-import { DispatchSummary } from '../types';
-import { useLanguage } from '../utils/LanguageContext';
+import { DispatchSummary } from '@/types';
+import { useLanguage } from '@/utils/LanguageContext';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 
