@@ -1,7 +1,6 @@
-
 'use client';
 
-import React, { ErrorInfo, ReactNode } from 'react';
+import React, { Component, ErrorInfo, ReactNode } from 'react';
 
 interface Props {
   children?: ReactNode;
@@ -15,17 +14,16 @@ interface State {
 
 /**
  * Standard React Error Boundary.
- * Uses explicit React.Component to ensure compatibility across different environment configurations.
+ * Uses property initializer for state and direct Component inheritance to resolve type errors 
+ * where inherited members like state, props, and setState were not being recognized.
  */
-class ErrorBoundary extends React.Component<Props, State> {
-  // Fix: Explicitly initialize state in constructor for better type inference in some environments
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      hasError: false,
-      error: null,
-    };
-  }
+// Fix: Use direct Component import and inheritance to ensure type safety for state/props
+class ErrorBoundary extends Component<Props, State> {
+  // Fix: Use property initializer for state for better compatibility and type inference
+  public state: State = {
+    hasError: false,
+    error: null,
+  };
 
   // Static method to update state when an error occurs
   public static getDerivedStateFromError(error: Error): State {
@@ -37,8 +35,7 @@ class ErrorBoundary extends React.Component<Props, State> {
     console.error('Uncaught error:', error, errorInfo);
   }
 
-  // Fix: Use arrow function for property to preserve 'this' context, 
-  // and ensure React.Component methods like setState are resolved correctly.
+  // Fix: Arrow function preserves 'this' context, and setState is now recognized via inheritance
   private handleRetry = () => {
     this.setState({
       hasError: false,
@@ -50,9 +47,10 @@ class ErrorBoundary extends React.Component<Props, State> {
   };
 
   public render(): ReactNode {
-    // Fix: Access props from this context properly using inherited React.Component member
+    // Fix: Access props from inherited Component member
     const { children } = this.props;
 
+    // Fix: Access state from inherited Component member
     if (this.state.hasError) {
       return (
         <div className="flex flex-col items-center justify-center min-h-screen px-4 bg-black text-green-500 font-mono">
@@ -65,6 +63,7 @@ class ErrorBoundary extends React.Component<Props, State> {
               The kernel has been halted to prevent data corruption.
             </p>
             <div className="bg-black/50 p-4 border border-red-900/30 text-[10px] text-red-900 mb-8 overflow-auto">
+              {/* Fix: safely access error from state */}
               LOG: {this.state.error?.message || 'NULL_POINTER_EXCEPTION'}
             </div>
             <button
